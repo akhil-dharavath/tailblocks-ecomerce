@@ -10,8 +10,8 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="product/:id" element={<Product/>} />
+        <Route exact path="/" element={<Home/>} />
+        <Route exact path="product/:id" element={<Product/>} />
       </Routes>
       <Footer/>
     </Router>
