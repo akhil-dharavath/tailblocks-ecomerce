@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import getOneProduct from "../api/getOneProduct";
+import Spinner from '../components/Spinner'
 
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const [loading,setLoading] = useState(false);
   const fetchOneProduct = async () => {
+    setLoading(true);
     const response = await getOneProduct(id);
     if (response === undefined) {
       return <h1>Unable to fetch Data</h1>;
     }
+    setLoading(false);
     setProduct(response);
   };
   useEffect(() => {
     fetchOneProduct();
     // eslint-disable-next-line
   }, []);
+
+  if(loading){
+    return <Spinner />
+  }
+  
   return (
     <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">
